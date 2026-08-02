@@ -1,0 +1,33 @@
+# This file contains data structures for the different objects of the game and how they connect to each other. The file should be loaded
+# and parsed into code and each object has a distinct structure format
+MOVEMENTS:
+  ENTER: ["enter", "go in", "building"]
+  NORTH: ["north", "up", "go north", "go up"]
+  SOUTH: ["down", "go down", "go south", "south"]
+  EAST: [ "east", "right", "go east", "gp right" ]
+  WEST: ["west", "left", "go west", "go left"]
+
+LOCATIONS: !!omap
+  - START_GAME_LOC:
+      description: "You're in the middle of the road. There's an old rock building right before you"
+      destinations:
+        - movements: ["east", "right", "go east", "go right"]
+          to: OLD_BUILDING_LOC
+
+        - movements: ["west", "left", "go west", "go left"]
+          to: LEVELEDUP_HILL_LOC
+  
+  - OLD_BUILDING_LOC:
+      description: "You're inside the building which is actually a well house for a lage spring."
+      destinations:
+        movements: ["west", "left", "go west", "go left"]
+        to: START_GAME_LOC
+
+  - LEVELEDUP_HILL_LOC:
+      description: "You've walked up a hill, the road is leveled down past the other side. A hiker stands right next to you"
+      destinations:
+        - movements: ["east", "right", "go east", "go right"]
+          to: START_GAME_LOC
+
+RANDOM_MESSAGES:
+  NO_BACK: Sorry, but I no longer seem to remember how it was you got here.
