@@ -6,7 +6,7 @@ def typed_random_word(input: str, random_messages: dict) -> None:
 
 def parse_locations_and_destionations():
     try:
-        with open("game_data.yaml", encoding="utf-8") as file: 
+        with open("game_data.yaml", encoding="utf-8") as file:
             db = yaml.safe_load(file)
 
             locations, motions = [], []
@@ -15,7 +15,8 @@ def parse_locations_and_destionations():
             
             for _, movements in db["MOVEMENTS"].items():
                 motions.extend(movements)
-                
+
+            print(db["TESTING"])
             return (locations, motions)
         
     except FileNotFoundError as err:

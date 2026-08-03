@@ -31,3 +31,7 @@ LOCATIONS: !!omap
 
 RANDOM_MESSAGES:
   NO_BACK: Sorry, but I no longer seem to remember how it was you got here.
+
+TESTING:
+  - [ENTER, NORTH, SOUTH, EAST, WEST]
+  - [RIGHT, LEFT, UP, DOWN]

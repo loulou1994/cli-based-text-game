@@ -1,5 +1,5 @@
 from typing import List
-from game_types import Destination
+from cli_based_game.game_types import Destination
 
 class Player:
     def __init__(self, motions: List[str]) -> None:
