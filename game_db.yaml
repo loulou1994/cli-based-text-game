@@ -4,7 +4,7 @@ MOVEMENTS:
   ENTER: ["enter", "go in", "building"]
   NORTH: ["north", "up", "go north", "go up"]
   SOUTH: ["down", "go down", "go south", "south"]
-  EAST: [ "east", "right", "go east", "gp right" ]
+  EAST: [ "east", "right", "go east", "go right" ]
   WEST: ["west", "left", "go west", "go left"]
 
 LOCATIONS: !!omap
@@ -29,7 +29,7 @@ LOCATIONS: !!omap
         - movements: ["east", "right", "go east", "go right"]
           to: START_GAME_LOC
 
-RANDOM_MESSAGES:
+RANDOM_MESSAGES: !!omap
   NO_BACK: Sorry, but I no longer seem to remember how it was you got here.
 
 TESTING:
