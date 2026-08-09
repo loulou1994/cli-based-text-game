@@ -16,7 +16,7 @@ def parse_game_db():
             for _, movements in db["MOVEMENTS"].items():
                 motions.extend(movements)
 
-            print(db["RANDOM_MESSAGES"])
+            # print(db["RANDOM_MESSAGES"])
             return (locations, motions)
         
     except FileNotFoundError as err:

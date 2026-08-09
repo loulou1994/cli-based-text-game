@@ -29,9 +29,5 @@ LOCATIONS: !!omap
         - movements: ["east", "right", "go east", "go right"]
           to: START_GAME_LOC
 
-RANDOM_MESSAGES: !!omap
+arbitrary_messages:
   NO_BACK: Sorry, but I no longer seem to remember how it was you got here.
-
-TESTING:
-  - [ENTER, NORTH, SOUTH, EAST, WEST]
-  - [RIGHT, LEFT, UP, DOWN]
