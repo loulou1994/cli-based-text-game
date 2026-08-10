@@ -1,13 +1,13 @@
 # This file contains data structures for the different objects of the game and how they connect to each other. The file should be loaded
 # and parsed into code and each object has a distinct structure format
-MOVEMENTS:
+Movements:
   ENTER: ["enter", "go in", "building"]
   NORTH: ["north", "up", "go north", "go up"]
   SOUTH: ["down", "go down", "go south", "south"]
   EAST: [ "east", "right", "go east", "go right" ]
   WEST: ["west", "left", "go west", "go left"]
 
-LOCATIONS: !!omap
+Locations: !!omap
   - START_GAME_LOC:
       description: "You're in the middle of the road. There's an old rock building right before you"
       destinations:
@@ -29,5 +29,5 @@ LOCATIONS: !!omap
         - movements: ["east", "right", "go east", "go right"]
           to: START_GAME_LOC
 
-arbitrary_messages:
+Arbitrary_Messages:
   NO_BACK: Sorry, but I no longer seem to remember how it was you got here.

@@ -1,4 +1,5 @@
 import yaml
+from cli_based_game.game_data_lookups import ArbitraryMessages
 
 def typed_random_word(input: str, random_messages: dict) -> None:
     if input in random_messages:
@@ -9,16 +10,24 @@ def parse_game_db():
         with open("game_db.yaml", encoding="utf-8") as file:
             db = yaml.safe_load(file)
 
-            locations, motions = [], []
+            locations, motions, arbitrary_messages = [], [], []
+
             for location in db["LOCATIONS"]:
+                print(location)
                 locations.append(location)
             
             for _, movements in db["MOVEMENTS"].items():
                 motions.extend(movements)
 
-            # print(db["RANDOM_MESSAGES"])
-            return (locations, motions)
-        
+            for msg_key in ArbitraryMessages:
+                arbitrary_messages.append(db["Arbitrary_Messages"][msg_key.name])
+
+            return (locations, motions, arbitrary_messages)
+
+    except KeyError as err:
+        print(f"Error! Tried to access a non-existant key {err}")
+        exit(1)
+
     except FileNotFoundError as err:
         print(f"The file couldn't be resolved:\n{err}")
         exit(1)

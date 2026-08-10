@@ -27,6 +27,6 @@ class Game(object):
                     
                 except ValueError as err:
                     print(f"{err}\n")
-                            
+                     
                 except Exception as err:
                     print(f"An unexpected error happened`\n{err}")
