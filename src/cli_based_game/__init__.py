@@ -1,5 +1,4 @@
-from cli_based_game.game_data_lookups import ArbitraryMessages
-from cli_based_game.game_data import game_db_data
+from cli_based_game.game_data import *
 from cli_based_game.game import Game
 from cli_based_game.player import Player
 

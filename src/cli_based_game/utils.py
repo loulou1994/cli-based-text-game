@@ -1,10 +1,6 @@
 import yaml
 from cli_based_game.game_data_lookups import ArbitraryMessages
 
-def typed_random_word(input: str, random_messages: dict) -> None:
-    if input in random_messages:
-        raise ValueError(random_messages[input])
-
 def parse_game_db():
     try:
         with open("game_db.yaml", encoding="utf-8") as file:
@@ -12,12 +8,11 @@ def parse_game_db():
 
             locations, motions, arbitrary_messages = [], [], []
 
-            for location in db["LOCATIONS"]:
-                print(location)
+            for _, location in db["Locations"]:
                 locations.append(location)
             
-            for _, movements in db["MOVEMENTS"].items():
-                motions.extend(movements)
+            for motion_key in db["Movements"]:
+                motions.extend(db["Movements"][motion_key])
 
             for msg_key in ArbitraryMessages:
                 arbitrary_messages.append(db["Arbitrary_Messages"][msg_key.name])
@@ -35,3 +30,7 @@ def parse_game_db():
     except Exception as err:
         print(f"An error happened:\n{err}")
         exit(1)
+
+def typed_random_word(input: str, random_messages: dict) -> None:
+    if input in random_messages:
+        raise ValueError(random_messages[input])

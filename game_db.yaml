@@ -1,20 +1,21 @@
 # This file contains data structures for the different objects of the game and how they connect to each other. The file should be loaded
 # and parsed into code and each object has a distinct structure format
 Movements:
-  ENTER: ["enter", "go in", "building"]
-  NORTH: ["north", "up", "go north", "go up"]
-  SOUTH: ["down", "go down", "go south", "south"]
-  EAST: [ "east", "right", "go east", "go right" ]
-  WEST: ["west", "left", "go west", "go left"]
+  NORTH: ["north", "up", "u", "n"]
+  SOUTH: ["down", "d", "south", "s"]
+  EAST: [ "east", "right", "r", "e" ]
+  WEST: ["west", "left", "w", "l"]
+  HOUSE: ["enter", "build", "house"]
+
 
 Locations: !!omap
   - START_GAME_LOC:
       description: "You're in the middle of the road. There's an old rock building right before you"
       destinations:
-        - movements: ["east", "right", "go east", "go right"]
+        - movements: [EAST]
           to: OLD_BUILDING_LOC
 
-        - movements: ["west", "left", "go west", "go left"]
+        - movements: [WEST]
           to: LEVELEDUP_HILL_LOC
   
   - OLD_BUILDING_LOC:
