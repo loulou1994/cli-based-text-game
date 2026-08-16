@@ -1,3 +1,4 @@
+from typing import List
 from cli_based_game.utils import parse_game_db
 
 

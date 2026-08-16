@@ -1,18 +1,22 @@
+from typing import List
 import yaml
 from cli_based_game.game_data_lookups import ArbitraryMessages
+from cli_based_game.game_types import Location
 
 def parse_game_db():
     try:
         with open("game_db.yaml", encoding="utf-8") as file:
             db = yaml.safe_load(file)
 
-            locations, motions, arbitrary_messages = [], [], []
+            locations: List[Location] = []
+            motions: List[List[str]] = []
+            arbitrary_messages: List[str] = []
 
             for _, location in db["Locations"]:
                 locations.append(location)
             
-            for motion_key in db["Movements"]:
-                motions.extend(db["Movements"][motion_key])
+            for motion in db["Movements"]:
+                motions.append(motion[1])
 
             for msg_key in ArbitraryMessages:
                 arbitrary_messages.append(db["Arbitrary_Messages"][msg_key.name])
