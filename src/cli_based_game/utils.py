@@ -10,6 +10,7 @@ def parse_game_db():
 
             locations: List[Location] = []
             motions: List[List[str]] = []
+            actions: List[List[str]] = []
             arbitrary_messages: List[str] = []
 
             for _, location in db["Locations"]:
@@ -21,7 +22,10 @@ def parse_game_db():
             for msg_key in ArbitraryMessages:
                 arbitrary_messages.append(db["Arbitrary_Messages"][msg_key.name])
 
-            return (locations, motions, arbitrary_messages)
+            for action in db["Actions"]:
+                actions.append(action[1])
+
+            return (locations, motions, actions, arbitrary_messages)
 
     except KeyError as err:
         print(f"Error! Tried to access a non-existant key {err}")

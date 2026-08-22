@@ -11,6 +11,13 @@ class Motions(Enum):
     EAST=auto()
     WEST=auto()
     HOUSE=auto()
+
+class Actions(Enum):
+    TALK=0
+    BACK=auto
+    # ATTACK=auto()
+    # DEFEND=auto()
     
 class ArbitraryMessages(Enum):
-    NO_BACK=0
+    WELCOME_MSG=0
+    NO_BACK=auto()

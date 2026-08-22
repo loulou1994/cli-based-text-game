@@ -7,6 +7,11 @@ Movements: !!omap
   - WEST: ["west", "left", "w", "l"]
   - HOUSE: ["enter", "build", "house"]
 
+Actions: !!omap
+  - TALK: ["talk", "speak", "chat"]
+  - BACK: ["back", "prev", "previous", "backward"]
+  - ATTACK: ["attack", "fight", "hit"]
+  - DEFEND: ["defend", "block", "shield"]
 
 Locations: !!omap
   - START_GAME_LOC:
@@ -14,10 +19,9 @@ Locations: !!omap
       destinations:
         - movements: [EAST]
           to: OLD_BUILDING_LOC
-
         - movements: [WEST]
           to: LEVELEDUP_HILL_LOC
-  
+
   - OLD_BUILDING_LOC:
       description: "You're inside the building which is actually a well house for a lage spring."
       destinations:
@@ -29,6 +33,31 @@ Locations: !!omap
       destinations:
         - movements: [EAST]
           to: START_GAME_LOC
+        - movements: [WEST]
+          to: END_ROAD_LOC
+      
+  - END_ROAD_LOC:
+      description: |
+        The road coming from the east ends here. You are surrounded by trees. Go further more  leads to small forest
+      destinations:
+        - movements: [WEST]
+          to: FOREST_06_LOC
+        - movements: [EAST]
+          to: LEVELEDUP_HILL_LOC
+
+  - FOREST_06_LOC:
+      description: You're wandering aimlessly through the forest
+      conditions: {forest: true}
+      destinations:
+        - movements: [NORTH]
+          to: END_ROAD_LOC
+          
+short form: You're at road's end
+You are surrounded by trees. Go further more 
+leads to small forest
+short form: You're at road's end"
 
 Arbitrary_Messages:
+  WELCOME_MSG: "Welcome to the cave adventure clone game, hope you'll have a great chilling time while here hihi!!"
   NO_BACK: Sorry, but I no longer seem to remember how it was you got here.
+  # HIKER_HINT: "The hiker says, 'I think you can go back to the road by going west, but I don't know how you got here.'"
