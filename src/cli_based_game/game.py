@@ -16,21 +16,33 @@ class Game(object):
         # self.locations_descr = locations_descr
         
     def run(self):
-            self._prompt_desc += f"\n\n{self._current_location["description"]}"
+            # self._prompt_desc += f"\n\n{self._current_location["description"]}"
+            print(self._prompt_desc)
 
             while True:
+                self._prompt_desc = self._current_location["description"]
                 player_input = input(f"{self._prompt_desc}\n> ")
-                
+
                 try:
-                    # typed_random_word(player_input,self.__random_messages)
-                    chosen_destination = self._player.move(player_input, self._current_destinations)
-                    self.move_to_new_location(locations[Locations[chosen_destination].value])
-                
+                    self._player.update_player_state(player_input)
+                    self.handle_player_action(player_input)
+
                 except ValueError as err:
-                    print(f"{err}\n")
-                     
+                    print(err)
+                    exit(1)
                 except Exception as err:
                     print(f"An unexpected error happened`\n{err}")
+
+                # try:
+                #     # typed_random_word(player_input,self.__random_messages)
+                #     chosen_destination = self._player.move(player_input, self._current_destinations)
+                #     self.move_to_new_location(locations[Locations[chosen_destination].value])
+                
+                # except ValueError as err:
+                #     print(f"{err}\n")
+                     
+                # except Exception as err:
+                #     print(f"An unexpected error happened`\n{err}")
 
     def move_to_new_location(self, new_location: Location) -> None:
         self._previous_location = self._current_location
@@ -48,3 +60,12 @@ class Game(object):
             return
 
         self._current_location, self._previous_location = self._previous_location, self._current_location
+
+    def handle_player_action(self, player_input: str):
+        match self._player._state:
+            case Player_State.WALKING:
+                destination = self._player.move(player_input, self._current_destinations)
+                self.move_to_new_location(locations[Locations[destination].value])
+            
+            case _:
+                raise ValueError("Couldn't figure out your move!")

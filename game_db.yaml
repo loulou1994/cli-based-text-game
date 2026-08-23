@@ -3,9 +3,11 @@
 Movements: !!omap
   - NORTH: ["north", "up", "u", "n"]
   - SOUTH: ["down", "d", "south", "s"]
-  - EAST: [ "east", "right", "r", "e" ]
+  - EAST: [ "east", "right", "r", "e"]
   - WEST: ["west", "left", "w", "l"]
-  - HOUSE: ["enter", "build", "house"]
+  - ENTER: ["enter", in]
+  - OUT: ["exit", "out"]
+  - HOUSE: ["build", "house"]
 
 Actions: !!omap
   - TALK: ["talk", "speak", "chat"]
@@ -13,11 +15,12 @@ Actions: !!omap
   - ATTACK: ["attack", "fight", "hit"]
   - DEFEND: ["defend", "block", "shield"]
 
+
 Locations: !!omap
   - START_GAME_LOC:
       description: "You're in the middle of the road. There's an old rock building right before you"
       destinations:
-        - movements: [EAST]
+        - movements: [EAST, ENTER, HOUSE]
           to: OLD_BUILDING_LOC
         - movements: [WEST]
           to: LEVELEDUP_HILL_LOC
@@ -25,7 +28,7 @@ Locations: !!omap
   - OLD_BUILDING_LOC:
       description: "You're inside the building which is actually a well house for a lage spring."
       destinations:
-        - movements: [WEST]
+        - movements: [WEST, OUT]
           to: START_GAME_LOC
 
   - LEVELEDUP_HILL_LOC:
@@ -51,11 +54,146 @@ Locations: !!omap
       destinations:
         - movements: [NORTH]
           to: END_ROAD_LOC
-          
-short form: You're at road's end
-You are surrounded by trees. Go further more 
-leads to small forest
-short form: You're at road's end"
+        - movements: [EAST]
+          to: FOREST_05_LOC
+        - movements: [SOUTH]
+          to: FOREST_03_LOC
+        - movements: [WEST]
+          to: FOREST_09_LOC
+
+  - FOREST_05_LOC:
+      description: You're wandering aimlessly through the forest
+      conditions: {forest: true}
+      destinations:
+        - movements: [NORTH]
+          to: FOREST_06_LOC
+        - movements: [SOUTH]
+          to: FOREST_02_LOC
+        - movements: [EAST]
+          to: FOREST_04_LOC
+        - movements: [WEST]
+          to: FOREST_08_LOC
+
+  - FOREST_04_LOC:
+      description: You're wandering aimlessly through the forest
+      conditions: {forest: true}
+      destinations:
+        - movements: [EAST]
+          to: FOREST_05_LOC
+        - movements: [SOUTH]
+          to: FOREST_01_LOC
+        - movements: [WEST]
+          to: FOREST_07_LOC
+
+  - FOREST_03_LOC:
+      description: You're wandering aimlessly through the forest
+      conditions: {forest: true}
+      destinations:
+        - movements: [WEST]
+          to: FOREST_09_LOC
+        - movements: [SOUTH]
+          to: FOREST_06_LOC
+        - movements: [NORTH]
+          to: FOREST_04_LOC
+        - movements: [EAST]
+          to: FOREST_02_LOC
+  
+  - FOREST_02_LOC:
+      description: You're wandering aimlessly through the forest
+      conditions: {forest: true}
+      destinations:
+        - movements: [NORTH]
+          to: FOREST_03_LOC
+        - movements: [WEST]
+          to: FOREST_08_LOC
+        - movements: [SOUTH]
+          to: FOREST_05_LOC
+        - movements: [EAST]
+          to: FOREST_01_LOC
+  
+  - FOREST_01_LOC:
+      description: You're wandering aimlessly through the forest
+      conditions: {forest: true}
+      destinations:
+        - movements: [EAST]
+          to: FOREST_02_LOC
+        - movements: [SOUTH]
+          to: FOREST_04_LOC
+        - movements: [NORTH]
+          to: FOREST_07_LOC
+        - movements: [WEST]
+          to: GRATE_LOC
+
+  - FOREST_09_LOC:
+      description: You're wandering aimlessly through the forest
+      conditions: {forest: true}
+      destinations:
+        - movements: [SOUTH]
+          to: FOREST_06_LOC
+        - movements: [NORTH]
+          to: GRATE_LOC
+        - movements: [EAST]
+          to: FOREST_08_LOC
+        - movements: [WEST]
+          to: FOREST_03_LOC
+
+  - FOREST_08_LOC:
+      description: You're wandering aimlessly through the forest
+      conditions: {forest: true}
+      destinations:
+        - movements: [SOUTH]
+          to: FOREST_05_LOC
+        - movements: [WEST]
+          to: FOREST_02_LOC
+        - movements: [NORTH]
+          to: FOREST_09_LOC
+        - movements: [EAST]
+          to: FOREST_07_LOC
+
+  - FOREST_07_LOC:
+      description: You're wandering aimlessly through the forest
+      conditions: {forest: true}
+      destinations:
+        - movements: [SOUTH]
+          to: FOREST_04_LOC
+        - movements: [WEST]
+          to: FOREST_01_LOC
+        - movements: [NORTH]
+          to: GRATE_LOC
+        - movements: [EAST]
+          to: FOREST_08_LOC
+
+  - GRATE_LOC:
+      description: |
+        You've reached the end of the stream which is actually a dry streambed. Set into the bed is a large steel grate covered in dirt
+      destinations:
+        - movements: [EAST]
+          to: STREAM_ROCK_SLIT_LOC
+        - movements: [SOUTH]
+          to: FOREST_01_LOC
+        - movements: [NORTH]
+          to: FOREST_07_LOC
+        - movements: [WEST]
+          to: FOREST_09_LOC
+
+  - STREAM_ROCK_SLIT_LOC:
+      description: |
+        The stream of water seeems to be drying up as the water splashes into a 2-inch slit in the rock.
+      destinations:
+        - movements: [EAST]
+          to: WATER_STREAM_LOC
+        - movements: [WEST]
+          to: GRATE_LOC
+  
+  - WATER_STREAM_LOC:
+      description: |
+        a water stream flows along the channel. there seems to be some fishing equipment laid down beside the river
+      destinations:
+        - movements: [EAST]
+          to: WATER_STREAM_LOC
+        - movements: [WEST]
+          to: GRATE_LOC
+  
 
 Arbitrary_Messages:
   WELCOME_MSG: "Welcome to the cave adventure clone game, hope you'll have a great chilling time while here hihi!!"

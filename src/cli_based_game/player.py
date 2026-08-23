@@ -43,3 +43,5 @@ class Player:
             if player_input in motion:
                 self._state = Player_State.WALKING
                 return
+
+        raise ValueError(f"I don't really get what you intend to do.\nThe word \"{player_input}\" doesn't appear to be in my vocabulary")
