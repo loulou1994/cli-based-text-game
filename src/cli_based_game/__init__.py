@@ -1,7 +1,8 @@
-import cli_based_game.game_data # loading game database from game_db.yaml
-from cli_based_game.game import Game
-from cli_based_game.player import Player, Player_State
-from cli_based_game.game_data_lookups import Motions
+from .game_typing import *
+from .game_data_lookups import *
+from .game_data import * # loading game database from game_db.yaml
+# from .utils import *
+from .game import Game
 
 def main() -> None:
     Game().run()

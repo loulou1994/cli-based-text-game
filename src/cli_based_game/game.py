@@ -1,9 +1,6 @@
 from typing import List
-from cli_based_game.game_types import Location, Destination
-from cli_based_game.game_data_lookups import Locations, ArbitraryMessages
-from cli_based_game.game_data import locations, arbitrary_messages
-from cli_based_game.player import Player, Player_State
-from cli_based_game.utils import typed_random_word
+from cli_based_game import locations, arbitrary_messages, Locations, ArbitraryMessages, Location, Destination
+from .player import Player, Player_State
 
 class Game(object):
     def __init__(self) -> None:
@@ -16,33 +13,26 @@ class Game(object):
         # self.locations_descr = locations_descr
         
     def run(self):
-            # self._prompt_desc += f"\n\n{self._current_location["description"]}"
-            print(self._prompt_desc)
+            # print(self._prompt_desc)
 
             while True:
-                self._prompt_desc = self._current_location["description"]
-                player_input = input(f"{self._prompt_desc}\n> ")
+                self.output_current_prompt()
 
                 try:
+                    player_input = input("> ")
                     self._player.update_player_state(player_input)
                     self.handle_player_action(player_input)
 
                 except ValueError as err:
                     print(err)
                     exit(1)
+
+                except KeyboardInterrupt:
+                    print()
+                    exit(1)
+
                 except Exception as err:
                     print(f"An unexpected error happened`\n{err}")
-
-                # try:
-                #     # typed_random_word(player_input,self.__random_messages)
-                #     chosen_destination = self._player.move(player_input, self._current_destinations)
-                #     self.move_to_new_location(locations[Locations[chosen_destination].value])
-                
-                # except ValueError as err:
-                #     print(f"{err}\n")
-                     
-                # except Exception as err:
-                #     print(f"An unexpected error happened`\n{err}")
 
     def move_to_new_location(self, new_location: Location) -> None:
         self._previous_location = self._current_location
@@ -52,8 +42,8 @@ class Game(object):
     def back_to_prev_location(self):
         cant_go_back = False
 
-        if "conditions" in self._current_location:
-            cant_go_back = any(condition in self._current_location.conditions for condition in {"forest", "back"})
+        if self._current_location["conditions"] is not None:
+            cant_go_back = any(condition in self._current_location["conditions"] for condition in {"forest", "back"})
 
         if cant_go_back or not self._previous_location:
             self._prompt_desc = "Sorry, can't go back from here"
@@ -66,6 +56,16 @@ class Game(object):
             case Player_State.WALKING:
                 destination = self._player.move(player_input, self._current_destinations)
                 self.move_to_new_location(locations[Locations[destination].value])
+                self._prompt_desc = self._current_location["description"]
             
+            case Player_State.WALKING_BACK:
+                self.back_to_prev_location()
+                self._prompt_desc = self._current_location["description"]
+
             case _:
                 raise ValueError("Couldn't figure out your move!")
+
+    def output_current_prompt(self):
+        print()
+        print(self._prompt_desc)
+        print()

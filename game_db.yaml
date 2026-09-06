@@ -24,6 +24,8 @@ Locations: !!omap
           to: OLD_BUILDING_LOC
         - movements: [WEST]
           to: LEVELEDUP_HILL_LOC
+        - movements: [SOUTH]
+          to: WATER_STREAM_LOC
 
   - OLD_BUILDING_LOC:
       description: "You're inside the building which is actually a well house for a lage spring."
@@ -41,7 +43,7 @@ Locations: !!omap
       
   - END_ROAD_LOC:
       description: |
-        The road coming from the east ends here. You are surrounded by trees. Go further more  leads to small forest
+        The road coming from the east ends here. You are surrounded by trees. Go further more leads to a small forest
       destinations:
         - movements: [WEST]
           to: FOREST_06_LOC
@@ -189,10 +191,10 @@ Locations: !!omap
       description: |
         a water stream flows along the channel. there seems to be some fishing equipment laid down beside the river
       destinations:
-        - movements: [EAST]
-          to: WATER_STREAM_LOC
+        - movements: [NORTH]
+          to: START_GAME_LOC
         - movements: [WEST]
-          to: GRATE_LOC
+          to: STREAM_ROCK_SLIT_LOC
   
 
 Arbitrary_Messages:
