@@ -15,10 +15,15 @@ Actions: !!omap
   - ATTACK: ["attack", "fight", "hit"]
   - DEFEND: ["defend", "block", "shield"]
 
+Hints:
+  -FOREST:
+    turns: 3
+    question: "Seems like you're stuck in this maze-like forest. Wanna a way out?"
 
 Locations: !!omap
   - START_GAME_LOC:
       description: "You're in the middle of the road. There's an old rock building right before you"
+      conditions: {}
       destinations:
         - movements: [EAST, ENTER, HOUSE]
           to: OLD_BUILDING_LOC
@@ -29,6 +34,7 @@ Locations: !!omap
 
   - OLD_BUILDING_LOC:
       description: "You're inside the building which is actually a well house for a lage spring."
+      conditions: {}
       destinations:
         - movements: [WEST, OUT]
           to: START_GAME_LOC
@@ -44,6 +50,7 @@ Locations: !!omap
   - END_ROAD_LOC:
       description: |
         The road coming from the east ends here. You are surrounded by trees. Go further more leads to a small forest
+      conditions: {}
       destinations:
         - movements: [WEST]
           to: FOREST_06_LOC
@@ -53,6 +60,7 @@ Locations: !!omap
   - FOREST_06_LOC:
       description: You're wandering aimlessly through the forest
       conditions: {forest: true}
+      hint: FOREST
       destinations:
         - movements: [NORTH]
           to: END_ROAD_LOC
@@ -66,6 +74,7 @@ Locations: !!omap
   - FOREST_05_LOC:
       description: You're wandering aimlessly through the forest
       conditions: {forest: true}
+      hint: FOREST
       destinations:
         - movements: [NORTH]
           to: FOREST_06_LOC
@@ -79,6 +88,7 @@ Locations: !!omap
   - FOREST_04_LOC:
       description: You're wandering aimlessly through the forest
       conditions: {forest: true}
+      hint: FOREST
       destinations:
         - movements: [EAST]
           to: FOREST_05_LOC
@@ -90,6 +100,7 @@ Locations: !!omap
   - FOREST_03_LOC:
       description: You're wandering aimlessly through the forest
       conditions: {forest: true}
+      hint: FOREST
       destinations:
         - movements: [WEST]
           to: FOREST_09_LOC
@@ -103,6 +114,7 @@ Locations: !!omap
   - FOREST_02_LOC:
       description: You're wandering aimlessly through the forest
       conditions: {forest: true}
+      hint: FOREST
       destinations:
         - movements: [NORTH]
           to: FOREST_03_LOC
@@ -116,6 +128,7 @@ Locations: !!omap
   - FOREST_01_LOC:
       description: You're wandering aimlessly through the forest
       conditions: {forest: true}
+      hint: FOREST
       destinations:
         - movements: [EAST]
           to: FOREST_02_LOC
@@ -129,6 +142,7 @@ Locations: !!omap
   - FOREST_09_LOC:
       description: You're wandering aimlessly through the forest
       conditions: {forest: true}
+      hint: FOREST
       destinations:
         - movements: [SOUTH]
           to: FOREST_06_LOC
@@ -142,6 +156,7 @@ Locations: !!omap
   - FOREST_08_LOC:
       description: You're wandering aimlessly through the forest
       conditions: {forest: true}
+      hint: FOREST
       destinations:
         - movements: [SOUTH]
           to: FOREST_05_LOC
@@ -155,6 +170,7 @@ Locations: !!omap
   - FOREST_07_LOC:
       description: You're wandering aimlessly through the forest
       conditions: {forest: true}
+      hint: FOREST
       destinations:
         - movements: [SOUTH]
           to: FOREST_04_LOC
@@ -168,6 +184,7 @@ Locations: !!omap
   - GRATE_LOC:
       description: |
         You've reached the end of the stream which is actually a dry streambed. Set into the bed is a large steel grate covered in dirt
+      conditions: {}
       destinations:
         - movements: [EAST]
           to: STREAM_ROCK_SLIT_LOC
@@ -181,6 +198,7 @@ Locations: !!omap
   - STREAM_ROCK_SLIT_LOC:
       description: |
         The stream of water seeems to be drying up as the water splashes into a 2-inch slit in the rock.
+      conditions: {}
       destinations:
         - movements: [EAST]
           to: WATER_STREAM_LOC
@@ -190,14 +208,14 @@ Locations: !!omap
   - WATER_STREAM_LOC:
       description: |
         a water stream flows along the channel. there seems to be some fishing equipment laid down beside the river
+      conditions: {}
       destinations:
         - movements: [NORTH]
           to: START_GAME_LOC
         - movements: [WEST]
           to: STREAM_ROCK_SLIT_LOC
   
-
-Arbitrary_Messages:
-  WELCOME_MSG: "Welcome to the cave adventure clone game, hope you'll have a great chilling time while here hihi!!"
-  NO_BACK: Sorry, but I no longer seem to remember how it was you got here.
+Arbitrary_Messages: !!omap
+  - WELCOME_MSG: "Welcome to the cave adventure clone game, hope you'll have a great chilling time while here hihi!!"
+  - NO_BACK: "Sorry, can't go back from here"
   # HIKER_HINT: "The hiker says, 'I think you can go back to the road by going west, but I don't know how you got here.'"

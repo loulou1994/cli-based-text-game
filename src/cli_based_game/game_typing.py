@@ -1,4 +1,4 @@
-from typing import List, TypedDict, Optional
+from typing import List, TypedDict
 
 class Destination(TypedDict):
     movements: List[str]
@@ -7,4 +7,9 @@ class Destination(TypedDict):
 class Location(TypedDict):
     description: str
     destinations: List[Destination]
-    conditions: Optional[dict[str, bool]]
+    conditions: dict[str, bool]
+
+class Location_Hint_State(TypedDict):
+    hint_name: str
+    turn_count: int
+    used: bool

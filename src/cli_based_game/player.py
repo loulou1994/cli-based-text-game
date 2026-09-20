@@ -1,7 +1,6 @@
 from typing import List
 from enum import Enum, auto
-from cli_based_game import motions, actions, Motions, Actions, Destination
-from .exceptions import WordNotFoundError
+from cli_based_game import motions, actions, Motions, Actions, Destination, InputWordNotFoundError, InputWordUnavailableError
 
 class Player_State(Enum):
     WALKING = 1
@@ -25,11 +24,11 @@ class Player:
         # player moved with an incompatible motion for the list of the current destinations
         for motion in motions:
             if lowered_input in motion:
-                raise ValueError("Can't really move with that")
+                raise InputWordUnavailableError()
 
 
         # player moved with an invalid motion that is not in the list of motions
-        raise WordNotFoundError(motion_input)
+        raise InputWordNotFoundError(motion_input)
 
     def update_player_state(self, player_input: str):
         lowered_input = player_input.lower()
@@ -47,4 +46,8 @@ class Player:
                 self._state = Player_State.WALKING
                 return
 
-        raise WordNotFoundError(player_input)
+        raise InputWordNotFoundError(player_input)
+
+    @property
+    def state(self):
+        return self._state

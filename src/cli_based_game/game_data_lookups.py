@@ -37,3 +37,6 @@ class Actions(Enum):
 class ArbitraryMessages(Enum):
     WELCOME_MSG=0
     NO_BACK=auto()
+
+class Hints(Enum):
+    FOREST=0
