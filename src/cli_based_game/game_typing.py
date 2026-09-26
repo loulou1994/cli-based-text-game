@@ -1,4 +1,6 @@
-from typing import List, TypedDict
+from typing import List, TypedDict, Literal, Tuple
+
+from .game_hints.locations_hints_state import Forest_Loc_State
 
 class Destination(TypedDict):
     movements: List[str]
@@ -9,7 +11,5 @@ class Location(TypedDict):
     destinations: List[Destination]
     conditions: dict[str, bool]
 
-class Location_Hint_State(TypedDict):
-    hint_name: str
-    turn_count: int
-    used: bool
+type Hint = Literal["FOREST"] | Literal["None"]
+type List_Of_Hint_States = Tuple[List[Forest_Loc_State]]

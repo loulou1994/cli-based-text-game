@@ -15,10 +15,10 @@ Actions: !!omap
   - ATTACK: ["attack", "fight", "hit"]
   - DEFEND: ["defend", "block", "shield"]
 
-Hints:
-  -FOREST:
-    turns: 3
-    question: "Seems like you're stuck in this maze-like forest. Wanna a way out?"
+Hints: !!omap
+  - FOREST:
+      turns: 3
+      question: "Seems like you're stuck in this maze-like forest. Wanna a way out?"
 
 Locations: !!omap
   - START_GAME_LOC:
