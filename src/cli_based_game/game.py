@@ -1,6 +1,9 @@
 from typing import List
-from cli_based_game import locations, arbitrary_messages, Locations, ArbitraryMessages, Location, Destination, InputWordError
-# from exceptions import InputWordError
+
+from .types.game_map import Location, Destination
+from .lookups import Locations, ArbitraryMessages
+from .load_data import locations, arbitrary_messages
+from .exceptions import InputWordError
 from .player import Player, Player_State
 
 class Game(object):
@@ -15,9 +18,10 @@ class Game(object):
         
     def run(self):
             # print(self._prompt_desc)
-            
+
             while True:
                 self.output_current_prompt()
+
                 try:
                     player_input = input("> ")
                     self._player.update_player_state(player_input)
@@ -30,10 +34,16 @@ class Game(object):
                 except KeyboardInterrupt:
                     print()
                     exit(1)
-
+                    
                 except Exception as err:
                     print(f"An unexpected error happened\n{str(err)}")
                     exit(1)
+
+    def handle_game_hint(self):
+        if "hint" in self._current_location:
+            
+            pass
+        pass
 
     def move_to_new_location(self, new_location: Location) -> None:
         self._previous_location = self._current_location

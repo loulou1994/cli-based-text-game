@@ -1,6 +1,11 @@
 from typing import List
 import yaml
-from cli_based_game import Location, List_Of_Hint_States, N_HINTS, Hints, Forest_Loc_State
+from .types.game_map import Location
+from .types.game_hints import List_Of_Hint_States
+from .lookups import Hint_Locations
+from cli_based_game.hints.hint_location_state import Hint_State_Factory
+
+N_HINTS = 1
 
 def parse_game_db():
     try:
@@ -13,11 +18,13 @@ def parse_game_db():
             arbitrary_messages: List[str] = []
             location_hint_states: List_Of_Hint_States = [[] for _ in range(N_HINTS)]
 
-            for _, location in db["Locations"]:
-                if "hint" in location:
-                    location_hint_states[Hints[location.hint].value].append(Forest_Loc_State())
-                    
+            for _loc, location in db["Locations"]:
+
                 locations.append(location)
+                
+                if "hint" in location:
+                    location_hint_state = Hint_State_Factory.create_hint_state(location["hint"])()
+                    location_hint_states[Hint_Locations[location["hint"]].value].append(location_hint_state)
             
             for motion in db["Movements"]:
                 motions.append(motion[1])
@@ -31,19 +38,19 @@ def parse_game_db():
 
             for action in db["Actions"]:
                 actions.append(action[1])
-
-            return (locations, motions, actions, arbitrary_messages)
+            
+            return (locations, location_hint_states, motions, actions, arbitrary_messages)
 
     except KeyError as err:
-        print(f"Paring game data error:\nTried to access a non-existant key {err}")
+        print(f"Parsing game data error:\nTried to access a non-existant key {err}")
         exit(1)
 
     except FileNotFoundError as err:
-        print(f"Paring game data error:\nThe file couldn't be resolved:\n{err}")
+        print(f"Parsing game data error:\nThe file couldn't be resolved:\n{err}")
         exit(1)
 
     except Exception as err:
-        print(f"Paring game data error:\n{err}")
+        print(f"Parsing game data error:\n{err}")
         exit(1)
-        
-locations, motions, actions, arbitrary_messages = parse_game_db()
+
+locations, location_hint_states, motions, actions, arbitrary_messages = parse_game_db()

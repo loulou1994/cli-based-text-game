@@ -1,14 +1,12 @@
-from .game_typing import *
-from .game_data_lookups import *
-from .constants import *
-from .exceptions import *
-from .game_hints import *
-from .game_data import * # loading game db from game_db.yaml
+# from .types.game_map import *
+# from .lookups import *
+# from .exceptions import *
+# from .hints import *
+# from .load_data import * # loading game db from game_db.yaml
 # from .utils import *
-# from .game import Game
+from cli_based_game.game import Game
 
 def main() -> None:
-    pass
-    # Game().run()
+    Game().run()
     # print(ArbitraryMessages(1))
     # print("Hello from cli-based-game!")

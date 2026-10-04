@@ -1,6 +1,10 @@
 from typing import List
 from enum import Enum, auto
-from cli_based_game import motions, actions, Motions, Actions, Destination, InputWordNotFoundError, InputWordUnavailableError
+
+from .types.game_map import Destination
+from .lookups import Motions, Actions
+from .load_data import motions, actions
+from .exceptions import InputWordNotFoundError, InputWordUnavailableError
 
 class Player_State(Enum):
     WALKING = 1

@@ -1,17 +1,18 @@
 from typing import Callable, Tuple
 
-from . import ForestMazeHint
-from .. import List_Of_Hint_States, Hint, Hints
+from cli_based_game.types.game_hints import List_Of_Hint_States, Hints
+from cli_based_game.lookups import Hint_Locations
+from .hints import ForestMazeHint
 
 class HintDispatcher:
     def __init__(self, hints: Tuple[ForestMazeHint]) -> None:
         self._hints = hints
-
-    def check_hints(self, locations_state: List_Of_Hint_States, hint: Hint) -> tuple[bool, str|None, Callable[[List_Of_Hint_States], str]|None]:
+        
+    def check_hints(self, locations_state: List_Of_Hint_States, hint: Hints) -> tuple[bool, str|None, Callable[[List_Of_Hint_States], str]|None]:
 
         match hint:
-            case Hints.FOREST.name:
-                forest_maze_hint = self._hints[Hints.FOREST.value]
+            case Hint_Locations.FOREST.name:
+                forest_maze_hint = self._hints[Hint_Locations.FOREST.value]
                 can_show = forest_maze_hint.can_show_hint(locations_state)
 
                 if can_show:

@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABC
 
-from .. import List_Of_Hint_States, Hints
-# from cli_based_game.game_typing import List_Of_Hint_States
+from cli_based_game.lookups import Hint_Locations
+from cli_based_game.types.game_hints import List_Of_Hint_States
 
 class AbstractHint(ABC):
     @abstractmethod
@@ -18,8 +18,8 @@ class AbstractHint(ABC):
         pass
 
 class ForestMazeHint(AbstractHint):
-    def __init__(self, hint_name: str, turns: int, question: str):
-        self._hint_name = hint_name
+    def __init__(self, turns: int, question: str): # hint_name: str
+        # self._hint_name = hint_name
         self._turns = turns
         self._question = question
 
@@ -27,11 +27,11 @@ class ForestMazeHint(AbstractHint):
         return "Here's the solution to the forest maze!"
     
     def can_show_hint(self, locations_state: List_Of_Hint_States):
-        for location_state in locations_state[Hints.FOREST.value]:
+        for location_state in locations_state[Hint_Locations.FOREST.value]:
 
-            if location_state.hint_name == self._hint_name and not location_state.used and location_state.turn_count == self._turns:
+            if not location_state.used and location_state.turn_count == self._turns:
                 return True
-
+            
         return False
     
     @property
