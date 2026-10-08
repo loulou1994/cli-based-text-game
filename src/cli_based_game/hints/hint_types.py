@@ -2,6 +2,6 @@ from typing import List, Literal
 
 type Hints = Literal["FOREST"] | Literal["None"]
 
-from cli_based_game.hints.hint_location_state import Forest_Hint_State
+from .hint_location_state import Forest_Hint_State
 
 type List_Of_Hint_States = List[List[Forest_Hint_State]]

@@ -7,6 +7,7 @@
 from cli_based_game.game import Game
 
 def main() -> None:
+    # print(new_list[0])
     Game().run()
     # print(ArbitraryMessages(1))
     # print("Hello from cli-based-game!")

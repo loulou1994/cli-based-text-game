@@ -1,7 +1,6 @@
 from typing import Callable, Tuple
-
-from cli_based_game.types.game_hints import List_Of_Hint_States, Hints
 from cli_based_game.lookups import Hint_Locations
+from .hint_types import List_Of_Hint_States, Hints
 from .hints import ForestMazeHint
 
 class HintDispatcher:

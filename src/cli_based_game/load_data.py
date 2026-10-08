@@ -1,11 +1,8 @@
 from typing import List
 import yaml
+from cli_based_game.hints import List_Of_Hint_States, Hint_State_Factory, N_HINTS
 from .types.game_map import Location
-from .types.game_hints import List_Of_Hint_States
 from .lookups import Hint_Locations
-from cli_based_game.hints.hint_location_state import Hint_State_Factory
-
-N_HINTS = 1
 
 def parse_game_db():
     try:

@@ -1,5 +1,7 @@
 from cli_based_game.lookups import Hint_Locations
-from cli_based_game.types.game_hints import Hints
+from .hint_types import Hints
+
+N_HINTS = 1
 
 class Forest_Hint_State():
     def __init__(self) -> None: # hint_loc: str

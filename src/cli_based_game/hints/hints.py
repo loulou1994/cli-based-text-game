@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABC
 
 from cli_based_game.lookups import Hint_Locations
-from cli_based_game.types.game_hints import List_Of_Hint_States
+from .hint_types import List_Of_Hint_States
 
 class AbstractHint(ABC):
     @abstractmethod

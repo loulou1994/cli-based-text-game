@@ -70,7 +70,7 @@ class Game(object):
             case Player_State.WALKING_BACK:
                 can_go_back = self.back_to_prev_location()
                 self._prompt_desc = self._current_location["description"] if can_go_back else arbitrary_messages[ArbitraryMessages.NO_BACK.value]
-
+            
             case _:
                 raise ValueError("Couldn't figure out your move!")
     
