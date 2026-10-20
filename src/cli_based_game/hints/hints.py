@@ -3,6 +3,8 @@ from abc import abstractmethod, ABC
 from cli_based_game.lookups import Hint_Locations
 from .hint_types import List_Of_Hint_States
 
+N_HINTS = 1
+
 class AbstractHint(ABC):
     @abstractmethod
     def show_hint(self, locations_state: List_Of_Hint_States) -> str:
@@ -17,7 +19,7 @@ class AbstractHint(ABC):
     def question(self) -> str:
         pass
 
-class ForestMazeHint(AbstractHint):
+class ForestHint(AbstractHint):
     def __init__(self, turns: int, question: str): # hint_name: str
         # self._hint_name = hint_name
         self._turns = turns

@@ -1,10 +1,11 @@
 from typing import List
 
-from .types.game_map import Location, Destination
+from .location_types import Location, Destination
 from .lookups import Locations, ArbitraryMessages
-from .load_data import locations, arbitrary_messages
+from .load_data import locations, arbitrary_messages, hints, location_hint_states
 from .exceptions import InputWordError
 from .player import Player, Player_State
+from cli_based_game.hints import HintDispatcher
 
 class Game(object):
     def __init__(self) -> None:
@@ -13,8 +14,8 @@ class Game(object):
         self._prompt_desc = f"{arbitrary_messages[ArbitraryMessages.WELCOME_MSG.value]}"
         self._player = Player()
         self._previous_location = None
-        # self.destinations = destinations
-        # self.locations_descr = locations_descr
+        self._loc_hint_states = location_hint_states
+        self._hint_dispatcher = HintDispatcher(hints)
         
     def run(self):
             # print(self._prompt_desc)
@@ -41,7 +42,6 @@ class Game(object):
 
     def handle_game_hint(self):
         if "hint" in self._current_location:
-            
             pass
         pass
 

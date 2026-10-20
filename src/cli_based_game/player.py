@@ -1,7 +1,7 @@
 from typing import List
 from enum import Enum, auto
 
-from .types.game_map import Destination
+from .location_types import Destination
 from .lookups import Motions, Actions
 from .load_data import motions, actions
 from .exceptions import InputWordNotFoundError, InputWordUnavailableError

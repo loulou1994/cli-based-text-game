@@ -5,6 +5,7 @@ class Destination(TypedDict):
     to: str
 
 class Location(TypedDict):
+    name: str
     description: str
     destinations: List[Destination]
     conditions: dict[str, bool]

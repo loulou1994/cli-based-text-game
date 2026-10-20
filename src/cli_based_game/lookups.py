@@ -40,3 +40,4 @@ class ArbitraryMessages(Enum):
 
 class Hint_Locations(Enum):
     FOREST=0
+    MAZE=auto()
