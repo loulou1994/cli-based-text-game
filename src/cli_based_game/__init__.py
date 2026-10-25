@@ -9,5 +9,6 @@ from .game import Game
 
 def main() -> None:
     Game().run()
+    # print(Regions["FOREST"])
     # print(ArbitraryMessages(1))
     # print("Hello from cli-based-game!")

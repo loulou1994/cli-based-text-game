@@ -1,20 +1,21 @@
 from typing import List
 
 from .location_types import Location, Destination
-from .lookups import Locations, ArbitraryMessages
-from .load_data import locations, arbitrary_messages, hints, location_hint_states
+from .lookups.world import Locations, Regions
+from .lookups.messages import ArbitraryMessages
+from .load_data import locations, arbitrary_messages, hints
 from .exceptions import InputWordError
 from .player import Player, Player_State
 from cli_based_game.hints import HintDispatcher
 
 class Game(object):
     def __init__(self) -> None:
-        self._current_location: Location = locations[0]
+        self._current_location: Location = locations[Regions.ABOVE_GROUND.value][0]
         self._current_destinations: List[Destination] = self._current_location["destinations"]
         self._prompt_desc = f"{arbitrary_messages[ArbitraryMessages.WELCOME_MSG.value]}"
         self._player = Player()
         self._previous_location = None
-        self._loc_hint_states = location_hint_states
+        # self._loc_hint_states = location_hint_states
         self._hint_dispatcher = HintDispatcher(hints)
         
     def run(self):
@@ -41,8 +42,9 @@ class Game(object):
                     exit(1)
 
     def handle_game_hint(self):
-        if "hint" in self._current_location:
-            pass
+        if "hint" not in self._current_location or self._current_location["hint"] is None:
+            return
+        
         pass
 
     def move_to_new_location(self, new_location: Location) -> None:
@@ -64,7 +66,7 @@ class Game(object):
         match self._player.state:
             case Player_State.WALKING:
                 destination = self._player.move(player_input, self._current_destinations)
-                self.move_to_new_location(locations[Locations[destination].value])
+                self.move_to_new_location(locations[Regions[destination[0]].value][Locations[destination[1]].value])
                 self._prompt_desc = self._current_location["description"]
             
             case Player_State.WALKING_BACK:

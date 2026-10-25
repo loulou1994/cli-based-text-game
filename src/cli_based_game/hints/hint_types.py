@@ -1,10 +1,10 @@
-from typing import List, Literal
-from .hint_location_state import Forest_Hint_State
+from typing import Literal, TypedDict
+from .hints import Forest_Hint_Solver
 
 type Hints = Literal["FOREST"] | Literal["None"]
 
-type List_Of_Hint_States = List[List[Forest_Hint_State]]
+# type List_Of_Hint_Solvers = List[Forest_Hint_Solver]
 
-from .hints import ForestHint
-
-type List_Of_Hints = List[ForestHint]
+class List_Of_Hint_Solvers(TypedDict):
+    FOREST: Forest_Hint_Solver
+# type List_Of_Hint_States = List[List[Forest_Hint_State]]

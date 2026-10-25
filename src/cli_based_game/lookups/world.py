@@ -1,5 +1,10 @@
 from enum import Enum, auto
 
+class Regions(Enum):
+    ABOVE_GROUND=0
+    FOREST=auto()
+
+    
 class Locations(Enum):
     START_GAME_LOC=0
     OLD_BUILDING_LOC=auto()
@@ -17,27 +22,3 @@ class Locations(Enum):
     GRATE_LOC=auto()
     STREAM_ROCK_SLIT_LOC=auto()
     WATER_STREAM_LOC=auto()
-
-class Motions(Enum):
-    NORTH=0
-    SOUTH=auto()
-    EAST=auto()
-    WEST=auto()
-    ENTER=auto()
-    OUT=auto()
-    HOUSE=auto()
-    
-
-class Actions(Enum):
-    TALK=0
-    BACK=auto()
-    # ATTACK=auto()
-    # DEFEND=auto()
-    
-class ArbitraryMessages(Enum):
-    WELCOME_MSG=0
-    NO_BACK=auto()
-
-class Hint_Locations(Enum):
-    FOREST=0
-    MAZE=auto()

@@ -1,17 +1,17 @@
+from typing import List
 from abc import abstractmethod, ABC
 
-from cli_based_game.lookups import Hint_Locations
-from .hint_types import List_Of_Hint_States
+from cli_based_game.lookups.hints import Hint_Locations
 
 N_HINTS = 1
 
 class AbstractHint(ABC):
     @abstractmethod
-    def show_hint(self, locations_state: List_Of_Hint_States) -> str:
+    def show_hint(self, forest_loc: str) -> str:
         pass
 
     @abstractmethod
-    def can_show_hint(self, locations_state: List_Of_Hint_States) -> bool:
+    def can_show_hint(self, forest_loc: str) -> bool:
         pass
 
     @property
@@ -19,20 +19,38 @@ class AbstractHint(ABC):
     def question(self) -> str:
         pass
 
-class ForestHint(AbstractHint):
-    def __init__(self, turns: int, question: str): # hint_name: str
+class Forest_Hint_State():
+    def __init__(self) -> None: # hint_loc: str
+        # self._hint_loc = hint_loc
+        self._turn_count = 0
+        self._used = False
+
+    @property
+    def turn_count(self) -> int:
+        return self._turn_count
+
+    @property
+    def used(self) -> bool:
+        return self._used
+    
+    def increment_turn_count(self) -> None:
+        self._turn_count += 1
+
+class Forest_Hint_Solver(AbstractHint):
+    def __init__(self, turns: int, question: str, forest_states: List[Forest_Hint_State]): # hint_name: str
         # self._hint_name = hint_name
         self._turns = turns
         self._question = question
+        self._forest_states = forest_states
 
-    def show_hint(self, locations_state: List_Of_Hint_States) -> str:
+    def show_hint(self, forest_loc: str) -> str:
         return "Here's the solution to the forest maze!"
     
-    def can_show_hint(self, locations_state: List_Of_Hint_States):
-        for location_state in locations_state[Hint_Locations.FOREST.value]:
+    def can_show_hint(self, forest_loc: str):
+        # for location_state in locations_state[Hint_Locations.FOREST.value]:
 
-            if not location_state.used and location_state.turn_count == self._turns:
-                return True
+        #     if not location_state.used and location_state.turn_count == self._turns:
+        #         return True
             
         return False
     

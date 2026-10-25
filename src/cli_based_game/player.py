@@ -1,8 +1,8 @@
-from typing import List
+from typing import List, Tuple
 from enum import Enum, auto
 
 from .location_types import Destination
-from .lookups import Motions, Actions
+from .lookups.actions import Motions, Actions
 from .load_data import motions, actions
 from .exceptions import InputWordNotFoundError, InputWordUnavailableError
 
@@ -17,7 +17,7 @@ class Player:
     def __init__(self) -> None:
         self._state: Player_State = Player_State.WALKING
 
-    def move(self, motion_input: str, destinations: List[Destination]) -> str:
+    def move(self, motion_input: str, destinations: List[Destination]) -> Tuple[str, str]:
         lowered_input = motion_input.lower()
         
         for destination in destinations:
